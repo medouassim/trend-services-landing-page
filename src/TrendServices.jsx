@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
-const LOGO_URL = "https://trend-algeria-connect.lovable.app/favicon.ico";
+const WEB_WA = `https://wa.me/213661972461?text=${encodeURIComponent("Bonjour, je suis intéressé par la création d'un site web")}`;
+
+const webServices = [
+  { icon: "🌐", ar: "صفحة هبوط", fr: "Landing page" },
+  { icon: "🏢", ar: "موقع تعريفي للمؤسسة", fr: "Site vitrine" },
+  { icon: "🎨", ar: "تجديد موقعك الحالي", fr: "Refonte de site" },
+  { icon: "🛠️", ar: "صيانة وتحديث", fr: "Maintenance & mises à jour" },
+];
 
 function useInView(options = {}) {
   const ref = useRef(null);
@@ -15,10 +22,11 @@ function useInView(options = {}) {
   return [ref, inView];
 }
 
-function AnimatedSection({ children, className = "", delay = 0 }) {
+function AnimatedSection({ children, className = "", delay = 0, style = {} }) {
   const [ref, inView] = useInView();
   return (
     <div ref={ref} className={className} style={{
+      ...style,
       opacity: inView ? 1 : 0,
       transform: inView ? "translateY(0)" : "translateY(48px)",
       transition: `opacity 0.8s ease ${delay}s, transform 0.8s ease ${delay}s`
@@ -52,14 +60,14 @@ const services = [
   { icon: "🗂️", ar: "تقديم ملفات إدارية", fr: "Dépôt de dossiers", desc_ar: "نتولى تقديم ملفاتك", desc_fr: "Nous gérons vos dossiers" },
   { icon: "🏢", ar: "سجل تجاري وضرائب", fr: "Registre de commerce", desc_ar: "تأسيس ومتابعة", desc_fr: "Création & suivi fiscal" },
   { icon: "📝", ar: "ملء استمارات", fr: "Remplissage de formulaires", desc_ar: "بدقة واحترافية", desc_fr: "Avec précision" },
-  { icon: "🚢", ar: "ملفات استيراد وتصدير", fr: "Import & Export", desc_ar: "متابعة كاملة لملفاتك", desc_fr: "Suivi complet" },
   { icon: "🚗", ar: "تنقل للإدارات", fr: "Déplacement administratif", desc_ar: "نتنقل بدلاً عنك", desc_fr: "Nous nous déplaçons" },
+  { icon: "📑", ar: "تقديم ومتابعة الملفات", fr: "Dépôt & suivi de dossiers", desc_ar: "من الإيداع حتى الرد", desc_fr: "Du dépôt jusqu'à la réponse" },
   { icon: "✍️", ar: "كاتبة عمومية معتمدة", fr: "Écrivain public agréé", desc_ar: "منذ 2024 — معتمدة", desc_fr: "Depuis 2024 — agréé" },
 ];
 
 const steps = [
   { num: "01", ar: "تواصل معنا", fr: "Contactez-nous", icon: "📞" },
-  { num: "02", ar: "أخبرنا بملفك", fr: "Décrivez votre dossier", icon: "📋" },
+  { num: "02", ar: "أخبرنا بمشكلتك وسنجد لك الحل", fr: "Dites-nous votre problème, on trouve la solution", icon: "📋" },
   { num: "03", ar: "نحن نتكفل بالباقي", fr: "On s'occupe du reste", icon: "✅" },
 ];
 
@@ -80,18 +88,18 @@ export default function TrendServices() {
   };
 
   return (
-    <div dir="rtl" style={{ fontFamily: "'Cairo', sans-serif", background: "#FDFAF5", color: "#1C1C1C", overflowX: "hidden" }}>
+    <div dir="rtl" style={{ fontFamily: "'Cairo', sans-serif", background: "#F8FAFD", color: "#1C1C1C", overflowX: "hidden" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-          --burgundy: #6B1E2E;
-          --wine: #8B2635;
-          --maroon: #3D0F1A;
-          --cream: #F5EDD6;
-          --gold: #C9A84C;
-          --gold-light: #E8C96A;
-          --offwhite: #FDFAF5;
+          --burgundy: #321B61;
+          --wine: #30437B;
+          --maroon: #1F0E40;
+          --cream: #EEF3FA;
+          --gold: #3E9BAD;
+          --gold-light: #69C1CB;
+          --offwhite: #F8FAFD;
           --sage: #f0f4f1;
           --charcoal: #1C1C1C;
         }
@@ -113,7 +121,7 @@ export default function TrendServices() {
           transition: transform 0.2s, box-shadow 0.2s;
           letter-spacing: 0.5px;
         }
-        .gold-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+        .gold-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(105,193,203,0.4); }
         .outline-btn {
           background: transparent;
           color: var(--cream);
@@ -129,7 +137,7 @@ export default function TrendServices() {
           gap: 8px;
           transition: all 0.2s;
         }
-        .outline-btn:hover { background: rgba(245,237,214,0.1); transform: translateY(-2px); }
+        .outline-btn:hover { background: rgba(238,243,250,0.1); transform: translateY(-2px); }
         .nav-link {
           color: var(--cream);
           font-weight: 500;
@@ -151,7 +159,7 @@ export default function TrendServices() {
         .nav-link:hover::after { width: 100%; }
         .service-card {
           background: white;
-          border: 1px solid rgba(107,30,46,0.08);
+          border: 1px solid rgba(50,27,97,0.08);
           border-radius: 8px;
           padding: 28px 24px;
           transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -171,7 +179,7 @@ export default function TrendServices() {
         .service-card:hover {
           transform: translateY(-6px);
           border-color: var(--burgundy);
-          box-shadow: 0 20px 40px rgba(107,30,46,0.12);
+          box-shadow: 0 20px 40px rgba(50,27,97,0.12);
         }
         .service-card:hover::before { height: 100%; }
         .step-line {
@@ -184,7 +192,7 @@ export default function TrendServices() {
         }
         .stat-card {
           background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(201,168,76,0.3);
+          border: 1px solid rgba(105,193,203,0.3);
           border-radius: 8px;
           padding: 36px 24px;
           text-align: center;
@@ -200,8 +208,8 @@ export default function TrendServices() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: rgba(245,237,214,0.12);
-          border: 1px solid rgba(201,168,76,0.4);
+          background: rgba(238,243,250,0.12);
+          border: 1px solid rgba(105,193,203,0.4);
           color: var(--cream);
           padding: 8px 18px;
           border-radius: 100px;
@@ -220,8 +228,8 @@ export default function TrendServices() {
           position: absolute;
           inset: 0;
           background-image: 
-            radial-gradient(circle at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(245,237,214,0.06) 0%, transparent 50%),
+            radial-gradient(circle at 20% 80%, rgba(105,193,203,0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(238,243,250,0.06) 0%, transparent 50%),
             repeating-linear-gradient(
               -45deg,
               transparent,
@@ -253,7 +261,7 @@ export default function TrendServices() {
           align-items: center;
           gap: 14px;
           background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(245,237,214,0.2);
+          border: 1px solid rgba(238,243,250,0.2);
           border-radius: 8px;
           padding: 18px 24px;
           transition: all 0.3s;
@@ -261,14 +269,14 @@ export default function TrendServices() {
           font-size: 15px;
         }
         .contact-pill:hover {
-          background: rgba(201,168,76,0.15);
+          background: rgba(105,193,203,0.15);
           border-color: var(--gold);
           transform: translateX(-4px);
         }
         .contact-icon {
           width: 42px;
           height: 42px;
-          background: rgba(201,168,76,0.2);
+          background: rgba(105,193,203,0.2);
           border-radius: 8px;
           display: flex;
           align-items: center;
@@ -281,6 +289,8 @@ export default function TrendServices() {
           .hero-btns a, .hero-btns button { text-align: center; justify-content: center; }
           .services-grid { grid-template-columns: 1fr 1fr !important; }
           .stats-grid { grid-template-columns: 1fr !important; }
+          .web-grid { grid-template-columns: 1fr 1fr !important; }
+          .services-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
           .steps-grid { grid-template-columns: 1fr !important; }
           .contact-grid { grid-template-columns: 1fr !important; }
           .map-section-inner { grid-template-columns: 1fr !important; }
@@ -301,7 +311,7 @@ export default function TrendServices() {
           flex-direction: column;
           gap: 20px;
           z-index: 999;
-          border-top: 1px solid rgba(201,168,76,0.3);
+          border-top: 1px solid rgba(105,193,203,0.3);
           transform: ${menuOpen ? 'translateY(0)' : 'translateY(-120%)'};
           transition: transform 0.35s ease;
         }
@@ -350,9 +360,9 @@ export default function TrendServices() {
       {/* NAVBAR */}
       <nav style={{
         position: "fixed", top: 0, right: 0, left: 0, zIndex: 1000,
-        background: scrolled ? "rgba(61,15,26,0.97)" : "transparent",
+        background: scrolled ? "rgba(31,14,64,0.97)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(201,168,76,0.2)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(105,193,203,0.2)" : "none",
         transition: "all 0.4s ease",
         padding: "0 5%",
       }}>
@@ -361,14 +371,15 @@ export default function TrendServices() {
           <div style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <img style={{width: "3rem", borderRadius: "10px"}} src="./logo.png"/>
             <div>
-              <div style={{ color: "#F5EDD6", fontSize: 15, fontWeight: 700, lineHeight: 1.2 }}>Trend Services</div>
-              <div style={{ color: "rgba(201,168,76,0.8)", fontSize: 11, fontWeight: 400 }}>مكتب خدمات</div>
+              <div style={{ color: "#EEF3FA", fontSize: 15, fontWeight: 700, lineHeight: 1.2 }}>Trend Services</div>
+              <div style={{ color: "rgba(105,193,203,0.8)", fontSize: 11, fontWeight: 400 }}>مكتب خدمات</div>
             </div>
           </div>
 
           {/* Desktop Nav */}
           <div className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: 36 }}>
             <span className="nav-link" onClick={() => scrollTo("services")}>الخدمات / Services</span>
+            <span className="nav-link" onClick={() => scrollTo("web")}>خدمات الويب / Web</span>
             <span className="nav-link" onClick={() => scrollTo("about")}>من نحن / À propos</span>
             <span className="nav-link" onClick={() => scrollTo("contact")}>اتصل بنا / Contact</span>
             <a href="https://wa.me/213675554833" className="gold-btn" style={{ padding: "10px 22px", fontSize: 14 }}>
@@ -384,10 +395,10 @@ export default function TrendServices() {
       </nav>
 
       {/* Mobile Menu */}
-      <div className="mobile-nav" style={{ transform: menuOpen ? "translateY(0)" : "translateY(-120%)", transition: "transform 0.35s ease", position: "fixed", top: 70, left: 0, right: 0, background: "var(--maroon)", padding: "24px", display: "flex", flexDirection: "column", gap: 20, zIndex: 999, borderTop: "1px solid rgba(201,168,76,0.3)" }}>
-        {["services", "about", "contact"].map((id, i) => (
-          <span key={id} className="nav-link" onClick={() => scrollTo(id)} style={{ fontSize: 18, color: "#F5EDD6" }}>
-            {["الخدمات / Services", "من نحن / À propos", "اتصل بنا / Contact"][i]}
+      <div className="mobile-nav" style={{ transform: menuOpen ? "translateY(0)" : "translateY(-120%)", transition: "transform 0.35s ease", position: "fixed", top: 70, left: 0, right: 0, background: "var(--maroon)", padding: "24px", display: "flex", flexDirection: "column", gap: 20, zIndex: 999, borderTop: "1px solid rgba(105,193,203,0.3)" }}>
+        {["services", "web", "about", "contact"].map((id, i) => (
+          <span key={id} className="nav-link" onClick={() => scrollTo(id)} style={{ fontSize: 18, color: "#EEF3FA" }}>
+            {["الخدمات / Services", "خدمات الويب / Web", "من نحن / À propos", "اتصل بنا / Contact"][i]}
           </span>
         ))}
         <a href="https://wa.me/213675554833" className="gold-btn" style={{ textAlign: "center", justifyContent: "center" }}>💬 واتساب / WhatsApp</a>
@@ -396,7 +407,7 @@ export default function TrendServices() {
       {/* HERO */}
       <section style={{
         minHeight: "100vh",
-        background: `linear-gradient(160deg, #3D0F1A 0%, #6B1E2E 50%, #8B2635 100%)`,
+        background: `linear-gradient(160deg, #1F0E40 0%, #321B61 50%, #30437B 100%)`,
         display: "flex", alignItems: "center",
         position: "relative", overflow: "hidden",
         paddingTop: 70,
@@ -404,65 +415,65 @@ export default function TrendServices() {
         <div className="hero-pattern" />
 
         {/* Decorative circles */}
-        <div style={{ position: "absolute", top: -100, left: -100, width: 400, height: 400, borderRadius: "50%", border: "1px solid rgba(201,168,76,0.1)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", top: -50, left: -50, width: 250, height: 250, borderRadius: "50%", border: "1px solid rgba(201,168,76,0.08)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: -120, right: -80, width: 500, height: 500, borderRadius: "50%", border: "1px solid rgba(245,237,214,0.06)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: -100, left: -100, width: 400, height: 400, borderRadius: "50%", border: "1px solid rgba(105,193,203,0.1)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: -50, left: -50, width: 250, height: 250, borderRadius: "50%", border: "1px solid rgba(105,193,203,0.08)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: -120, right: -80, width: 500, height: 500, borderRadius: "50%", border: "1px solid rgba(238,243,250,0.06)", pointerEvents: "none" }} />
 
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 5%", width: "100%", position: "relative", zIndex: 1 }}>
-          {/* Badges */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 48 }}>
-            {["✓ توجد دائماً / Toujours ouvert", "✓ كاتبة عمومية معتمدة", "📍 Médéa 26000"].map((b, i) => (
-              <div key={i} className="floating-badge">{b}</div>
-            ))}
-          </div>
-
           {/* Main heading */}
-          <div style={{ maxWidth: 800 }}>
+          <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
             <div className="section-label">مكتب خدمات ترند سرفيس · Bureau de Services</div>
             <h1 style={{
               fontSize: "clamp(36px, 6vw, 72px)",
               fontWeight: 900,
-              color: "#F5EDD6",
+              color: "#EEF3FA",
               lineHeight: 1.2,
               marginBottom: 12,
               fontFamily: "'Cairo', sans-serif",
             }}>
               نحن هنا لتسهيل<br />
-              <span style={{ color: "#C9A84C" }}>كل إجراءاتك الإدارية</span>
+              <span style={{ color: "#69C1CB" }}>كل إجراءاتك الإدارية</span>
             </h1>
             <p style={{
               fontSize: "clamp(16px, 2vw, 20px)",
-              color: "rgba(245,237,214,0.75)",
+              color: "rgba(238,243,250,0.75)",
               marginBottom: 40,
               fontWeight: 400,
               lineHeight: 1.7,
               fontFamily: "Cormorant Garamond, serif",
               fontStyle: "italic",
               direction: "ltr",
-              textAlign: "right",
+              textAlign: "center",
             }}>
               Votre partenaire de confiance pour toutes vos démarches administratives à Médéa
             </p>
 
-            <div className="hero-btns" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <div className="hero-btns" style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
               <a href="tel:+213675554833" className="gold-btn">📞 اتصل بنا</a>
               <a href="https://wa.me/213675554833" className="outline-btn">💬 واتساب / WhatsApp</a>
             </div>
           </div>
 
+          {/* Badges */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 48, justifyContent: "center" }}>
+            {["✓ توجد دائماً / Toujours ouvert", "✓ كاتبة عمومية معتمدة", "📍 Médéa 26000"].map((b, i) => (
+              <div key={i} className="floating-badge">{b}</div>
+            ))}
+          </div>
+
           {/* Scroll indicator */}
-          <div style={{ position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, color: "rgba(245,237,214,0.4)", fontSize: 12 }}>
-            <div style={{ width: 1, height: 40, background: "linear-gradient(to bottom, transparent, rgba(201,168,76,0.5))", animation: "float 2s infinite" }} />
+          <div style={{ position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, color: "rgba(238,243,250,0.4)", fontSize: 12 }}>
+            <div style={{ width: 1, height: 40, background: "linear-gradient(to bottom, transparent, rgba(105,193,203,0.5))", animation: "float 2s infinite" }} />
           </div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="services" style={{ padding: "100px 5%", background: "#FDFAF5" }}>
+      <section id="services" style={{ padding: "100px 5%", background: "#F8FAFD" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <AnimatedSection style={{ textAlign: "center", marginBottom: 60 }}>
             <div className="section-label" style={{ justifyContent: "center" }}>خدماتنا · Nos Services</div>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#3D0F1A", marginBottom: 12 }}>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#1F0E40", marginBottom: 12 }}>
               كل ما تحتاجه في مكان واحد
             </h2>
             <p style={{ color: "#666", fontSize: 17, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
@@ -471,7 +482,7 @@ export default function TrendServices() {
             <div className="divider" />
           </AnimatedSection>
 
-          <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
+          <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {services.map((s, i) => (
               <AnimatedSection key={i} delay={i * 0.08}>
                 <div
@@ -479,10 +490,10 @@ export default function TrendServices() {
                   onMouseEnter={() => setHoveredService(i)}
                   onMouseLeave={() => setHoveredService(null)}
                 >
-                  <div style={{ fontSize: 32, marginBottom: 14 }}>{s.icon}</div>
-                  <h3 style={{ fontSize: 16, fontWeight: 700, color: "#3D0F1A", marginBottom: 4 }}>{s.ar}</h3>
-                  <p style={{ fontSize: 13, color: "#8B2635", fontWeight: 600, marginBottom: 10, direction: "ltr" }}>{s.fr}</p>
-                  <div style={{ width: "100%", height: 1, background: "rgba(107,30,46,0.08)", margin: "10px 0" }} />
+                  <div style={{ width: 52, height: 52, borderRadius: 12, background: "linear-gradient(135deg, var(--gold), var(--gold-light))", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, marginBottom: 14 }}>{s.icon}</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, color: "#1F0E40", marginBottom: 4 }}>{s.ar}</h3>
+                  <p style={{ fontSize: 13, color: "#30437B", fontWeight: 600, marginBottom: 10, direction: "ltr" }}>{s.fr}</p>
+                  <div style={{ width: "100%", height: 1, background: "rgba(50,27,97,0.08)", margin: "10px 0" }} />
                   <p style={{ fontSize: 13, color: "#666", marginBottom: 2 }}>{s.desc_ar}</p>
                   <p style={{ fontSize: 12, color: "#999", direction: "ltr" }}>{s.desc_fr}</p>
                 </div>
@@ -492,16 +503,42 @@ export default function TrendServices() {
         </div>
       </section>
 
+      {/* WEB SERVICES */}
+      <section id="web" style={{ padding: "100px 5%", background: "linear-gradient(160deg, #1F0E40 0%, #321B61 100%)", position: "relative", overflow: "hidden" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <AnimatedSection style={{ textAlign: "center", marginBottom: 60 }}>
+            <div className="section-label" style={{ justifyContent: "center" }}>خدمات الويب · Web Services</div>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#EEF3FA", marginBottom: 12 }}>نصمم لك موقعك الإلكتروني</h2>
+            <p style={{ color: "rgba(105,193,203,0.8)", fontSize: 17, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>Votre présence en ligne, clé en main</p>
+            <div className="divider" />
+          </AnimatedSection>
+          <div className="web-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, marginBottom: 48 }}>
+            {webServices.map((w, i) => (
+              <AnimatedSection key={i} delay={i * 0.1}>
+                <div className="stat-card" style={{ padding: "32px 20px" }}>
+                  <div style={{ fontSize: 34, marginBottom: 12 }}>{w.icon}</div>
+                  <div style={{ color: "#EEF3FA", fontSize: 17, fontWeight: 700 }}>{w.ar}</div>
+                  <div style={{ color: "rgba(105,193,203,0.8)", fontSize: 14, direction: "ltr", marginTop: 4 }}>{w.fr}</div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <a href={WEB_WA} target="_blank" rel="noreferrer" className="gold-btn">💬 اطلب موقعك / Demandez votre site</a>
+          </div>
+        </div>
+      </section>
+
       {/* WHY US */}
-      <section id="about" style={{ padding: "100px 5%", background: "#3D0F1A", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 60%)", pointerEvents: "none" }} />
+      <section id="about" style={{ padding: "100px 5%", background: "#1F0E40", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 70% 50%, rgba(105,193,203,0.06) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <AnimatedSection style={{ textAlign: "center", marginBottom: 60 }}>
             <div className="section-label" style={{ justifyContent: "center" }}>لماذا نحن · Pourquoi nous</div>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#F5EDD6", marginBottom: 12 }}>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#EEF3FA", marginBottom: 12 }}>
               لماذا تختارنا؟
             </h2>
-            <p style={{ color: "rgba(201,168,76,0.7)", fontSize: 17, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
+            <p style={{ color: "rgba(105,193,203,0.7)", fontSize: 17, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
               Pourquoi nous choisir ?
             </p>
             <div className="divider" />
@@ -509,17 +546,17 @@ export default function TrendServices() {
 
           <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, marginBottom: 60 }}>
             {[
-              { val: 2, suffix: "+ ans", ar: "خبرة معتمدة", fr: "Expérience certifiée" },
+              { val: 10, suffix: "+", ar: "سنوات من الخبرة", fr: "Ans d'expérience" },
               { val: 100, suffix: "%", ar: "خدمة موثوقة", fr: "Service de confiance" },
               { val: 24, suffix: "/7", ar: "متاحون دائماً", fr: "Toujours disponibles" },
             ].map((s, i) => (
               <AnimatedSection key={i} delay={i * 0.15}>
                 <div className="stat-card">
-                  <div style={{ fontSize: "clamp(48px, 6vw, 72px)", fontWeight: 900, color: "#C9A84C", fontFamily: "Cormorant Garamond, serif", lineHeight: 1 }}>
+                  <div style={{ fontSize: "clamp(48px, 6vw, 72px)", fontWeight: 900, color: "#69C1CB", fontFamily: "Cormorant Garamond, serif", lineHeight: 1, direction: "ltr" }}>
                     <Counter target={s.val} suffix={s.suffix} />
                   </div>
-                  <div style={{ color: "#F5EDD6", fontSize: 18, fontWeight: 700, marginTop: 12 }}>{s.ar}</div>
-                  <div style={{ color: "rgba(201,168,76,0.6)", fontSize: 14, direction: "ltr", marginTop: 4 }}>{s.fr}</div>
+                  <div style={{ color: "#EEF3FA", fontSize: 18, fontWeight: 700, marginTop: 12 }}>{s.ar}</div>
+                  <div style={{ color: "rgba(105,193,203,0.6)", fontSize: 14, direction: "ltr", marginTop: 4 }}>{s.fr}</div>
                 </div>
               </AnimatedSection>
             ))}
@@ -529,15 +566,15 @@ export default function TrendServices() {
           <AnimatedSection delay={0.3}>
             <div style={{
               textAlign: "center", padding: "36px 40px",
-              background: "rgba(201,168,76,0.08)",
-              border: "1px solid rgba(201,168,76,0.2)",
+              background: "rgba(105,193,203,0.08)",
+              border: "1px solid rgba(105,193,203,0.2)",
               borderRadius: 8,
             }}>
-              <div style={{ fontSize: 36, color: "#C9A84C", fontFamily: "Cormorant Garamond, serif", marginBottom: 12 }}>"</div>
-              <p style={{ color: "#F5EDD6", fontSize: "clamp(16px, 2vw, 20px)", fontWeight: 600, lineHeight: 1.7, marginBottom: 8 }}>
+              <div style={{ fontSize: 36, color: "#69C1CB", fontFamily: "Cormorant Garamond, serif", marginBottom: 12 }}>"</div>
+              <p style={{ color: "#EEF3FA", fontSize: "clamp(16px, 2vw, 20px)", fontWeight: 600, lineHeight: 1.7, marginBottom: 8 }}>
                 انضموا إلينا وكونوا جزءاً من نجاحنا
               </p>
-              <p style={{ color: "rgba(245,237,214,0.6)", fontSize: 15, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
+              <p style={{ color: "rgba(238,243,250,0.6)", fontSize: 15, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
                 Rejoignez-nous et faites partie de notre succès
               </p>
             </div>
@@ -546,14 +583,14 @@ export default function TrendServices() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section style={{ padding: "100px 5%", background: "#F5EDD6" }}>
+      <section style={{ padding: "100px 5%", background: "#EEF3FA" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <AnimatedSection style={{ textAlign: "center", marginBottom: 60 }}>
             <div className="section-label" style={{ justifyContent: "center" }}>كيف نعمل · Comment ça marche</div>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#3D0F1A", marginBottom: 12 }}>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#1F0E40", marginBottom: 12 }}>
               كيف نعمل؟
             </h2>
-            <p style={{ color: "#8B2635", fontSize: 17, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
+            <p style={{ color: "#30437B", fontSize: 17, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
               Comment ça marche ?
             </p>
             <div className="divider" />
@@ -565,17 +602,17 @@ export default function TrendServices() {
                 <div style={{ textAlign: "center", position: "relative" }}>
                   <div style={{
                     width: 80, height: 80,
-                    background: "#3D0F1A",
+                    background: "#1F0E40",
                     borderRadius: "50%",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     margin: "0 auto 20px",
                     fontSize: 32,
-                    boxShadow: "0 8px 24px rgba(61,15,26,0.25)",
+                    boxShadow: "0 8px 24px rgba(31,14,64,0.25)",
                     transition: "transform 0.3s",
                   }}>{s.icon}</div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: "#C9A84C", letterSpacing: 2, marginBottom: 8 }}>{s.num}</div>
-                  <h3 style={{ fontSize: 20, fontWeight: 800, color: "#3D0F1A", marginBottom: 6 }}>{s.ar}</h3>
-                  <p style={{ fontSize: 14, color: "#8B2635", direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>{s.fr}</p>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: "#69C1CB", letterSpacing: 2, marginBottom: 8 }}>{s.num}</div>
+                  <h3 style={{ fontSize: 20, fontWeight: 800, color: "#1F0E40", marginBottom: 6 }}>{s.ar}</h3>
+                  <p style={{ fontSize: 14, color: "#30437B", direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>{s.fr}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -584,11 +621,11 @@ export default function TrendServices() {
       </section>
 
       {/* MAP */}
-      <section id="map" style={{ padding: "100px 5%", background: "#FDFAF5" }}>
+      <section id="map" style={{ padding: "100px 5%", background: "#F8FAFD" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <AnimatedSection style={{ textAlign: "center", marginBottom: 60 }}>
             <div className="section-label" style={{ justifyContent: "center" }}>موقعنا · Notre emplacement</div>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#3D0F1A", marginBottom: 12 }}>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#1F0E40", marginBottom: 12 }}>
               نحن في خدمتكم بالمدية
             </h2>
             <p style={{ color: "#666", fontSize: 17, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
@@ -609,11 +646,11 @@ export default function TrendServices() {
                   { icon: "📸", label: "إنستغرام / Instagram", val: "@services.trend", href: "https://instagram.com/services.trend" },
                   { icon: "🎵", label: "تيك توك / TikTok", val: "@trend.services", href: "https://tiktok.com/@trend.services" },
                 ].map((item, i) => (
-                  <a key={i} href={item.href || "#"} className="contact-pill" style={{ textDecoration: "none", background: "white", border: "1px solid rgba(107,30,46,0.1)", color: "#1C1C1C" }}>
-                    <div className="contact-icon" style={{ background: "rgba(107,30,46,0.08)" }}>{item.icon}</div>
+                  <a key={i} href={item.href} onClick={e => { if (!item.href) e.preventDefault(); }} className="contact-pill" style={{ textDecoration: "none", background: "white", border: "1px solid rgba(50,27,97,0.1)", color: "#1C1C1C" }}>
+                    <div className="contact-icon" style={{ background: "rgba(50,27,97,0.08)" }}>{item.icon}</div>
                     <div>
                       <div style={{ fontSize: 11, color: "#999", fontWeight: 600, letterSpacing: 1, marginBottom: 2 }}>{item.label}</div>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: "#3D0F1A", direction: "ltr" }}>{item.val}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: "#1F0E40", direction: "ltr" }}>{item.val}</div>
                     </div>
                   </a>
                 ))}
@@ -625,7 +662,7 @@ export default function TrendServices() {
 
             {/* Map */}
             <AnimatedSection delay={0.2}>
-              <div style={{ borderRadius: 8, overflow: "hidden", boxShadow: "0 20px 60px rgba(61,15,26,0.12)", border: "2px solid rgba(201,168,76,0.3)" }}>
+              <div style={{ borderRadius: 8, overflow: "hidden", boxShadow: "0 20px 60px rgba(31,14,64,0.12)", border: "2px solid rgba(105,193,203,0.3)" }}>
                 <iframe
                   className="map-iframe"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3227.123456!2d2.7!3d36.267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb3a6c7a8b1a1%3A0x0!2zTcOpZMOpYSwgQWxnZXJpYQ!5e0!3m2!1sen!2sdz!4v1"
@@ -641,15 +678,15 @@ export default function TrendServices() {
       </section>
 
       {/* CONTACT CTA */}
-      <section id="contact" style={{ padding: "100px 5%", background: "#6B1E2E", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%)", pointerEvents: "none" }} />
+      <section id="contact" style={{ padding: "100px 5%", background: "#321B61", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%, rgba(105,193,203,0.08) 0%, transparent 60%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
           <AnimatedSection>
             <div className="section-label" style={{ justifyContent: "center" }}>اتصل بنا · Contactez-nous</div>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#F5EDD6", marginBottom: 12 }}>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "#EEF3FA", marginBottom: 12 }}>
               هل أنت مستعد للبدء؟
             </h2>
-            <p style={{ color: "rgba(245,237,214,0.7)", fontSize: 18, marginBottom: 48, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
+            <p style={{ color: "rgba(238,243,250,0.7)", fontSize: 18, marginBottom: 48, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
               Prêt à commencer ? Contactez-nous dès maintenant
             </p>
             <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 40 }}>
@@ -657,7 +694,11 @@ export default function TrendServices() {
                 💬 واتساب الآن / WhatsApp
               </a>
               <a href="tel:+213675554833" className="outline-btn" style={{ justifyContent: "center", padding: "18px 24px", fontSize: 17 }}>
+<<<<<<< HEAD
                 📞 0675.55.48.33
+=======
+                0661972461
+>>>>>>> c5c627f (small updates on design nd other things)
               </a>
             </div>
             <div style={{ display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
@@ -666,9 +707,9 @@ export default function TrendServices() {
                 { icon: "📸", val: "@services.trend", href: "https://instagram.com/services.trend" },
                 { icon: "🎵", val: "@trend.services", href: "https://tiktok.com/@trend.services" },
               ].map((c, i) => (
-                <a key={i} href={c.href} style={{ color: "rgba(245,237,214,0.6)", fontSize: 14, display: "flex", alignItems: "center", gap: 6, transition: "color 0.2s" }}
-                  onMouseEnter={e => e.currentTarget.style.color = "#C9A84C"}
-                  onMouseLeave={e => e.currentTarget.style.color = "rgba(245,237,214,0.6)"}>
+                <a key={i} href={c.href} style={{ color: "rgba(238,243,250,0.6)", fontSize: 14, display: "flex", alignItems: "center", gap: 6, transition: "color 0.2s" }}
+                  onMouseEnter={e => e.currentTarget.style.color = "#69C1CB"}
+                  onMouseLeave={e => e.currentTarget.style.color = "rgba(238,243,250,0.6)"}>
                   {c.icon} {c.val}
                 </a>
               ))}
@@ -678,37 +719,38 @@ export default function TrendServices() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: "#3D0F1A", padding: "48px 5% 24px", borderTop: "1px solid rgba(201,168,76,0.2)" }}>
+      <footer style={{ background: "#1F0E40", padding: "48px 5% 24px", borderTop: "1px solid rgba(105,193,203,0.2)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <div style={{ fontSize: 28, fontWeight: 900, color: "#F5EDD6", marginBottom: 4 }}>Trend Services</div>
-            <div style={{ fontSize: 18, color: "#C9A84C", marginBottom: 8 }}>مكتب خدمات إدارية</div>
-            <p style={{ color: "rgba(245,237,214,0.5)", fontSize: 13, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
+            <img src="./logo.png" alt="Trend Services" style={{ width: 64, borderRadius: 14, marginBottom: 12 }} />
+            <div style={{ fontSize: 28, fontWeight: 900, color: "#EEF3FA", marginBottom: 4 }}>Trend Services</div>
+            <div style={{ fontSize: 18, color: "#69C1CB", marginBottom: 8 }}>مكتب خدمات إدارية</div>
+            <p style={{ color: "rgba(238,243,250,0.5)", fontSize: 13, direction: "ltr", fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}>
               Votre partenaire de confiance à Médéa
             </p>
           </div>
           <div style={{ display: "flex", justifyContent: "center", gap: 20, marginBottom: 32, flexWrap: "wrap" }}>
             {[
-              { icon: "📸", href: "https://instagram.com/services.trend" },
-              { icon: "🎵", href: "https://tiktok.com/@trend.services" },
-              { icon: "💬", href: "https://wa.me/213675554833" },
-              { icon: "✉️", href: "mailto:trendservices127@gmail.com" },
-              { icon: "📞", href: "tel:+213675554833" },
+              { icon: <i class="fa-brands fa-instagram"></i>, href: "https://instagram.com/services.trend" },
+              { icon: <i class="fa-brands fa-tiktok"></i>, href: "https://tiktok.com/@trend.services" },
+              { icon: <i class="fa-brands fa-whatsapp"></i>, href: "https://wa.me/213675554833" },
+              { icon: <i class="fa-regular fa-envelope"></i>, href: "mailto:trendservices127@gmail.com" },
+              { icon: <i class="fa-solid fa-phone"></i>, href: "tel:+213675554833" },
             ].map((s, i) => (
               <a key={i} href={s.href} style={{
                 width: 44, height: 44, borderRadius: "50%",
-                background: "rgba(201,168,76,0.1)",
-                border: "1px solid rgba(201,168,76,0.3)",
+                background: "rgba(67, 160, 176, 0.85)",
+                border: "1px solid rgba(105,193,203,0.3)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: 20, transition: "all 0.2s",
               }}
-                onMouseEnter={e => { e.currentTarget.style.background = "rgba(201,168,76,0.25)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "rgba(201,168,76,0.1)"; e.currentTarget.style.transform = "translateY(0)"; }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(105,193,203,0.25)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "rgba(67, 160, 176, 0.85)"; e.currentTarget.style.transform = "translateY(0)"; }}
               >{s.icon}</a>
             ))}
           </div>
-          <div style={{ borderTop: "1px solid rgba(201,168,76,0.1)", paddingTop: 24, textAlign: "center", color: "rgba(245,237,214,0.3)", fontSize: 13, direction: "ltr" }}>
-            © 2026 Trend Services — مكتب خدمات — Médéa, Algérie 26000
+          <div style={{ borderTop: "1px solid rgba(105,193,203,0.1)", paddingTop: 24, textAlign: "center", color: "rgba(238,243,250,0.3)", fontSize: 13, direction: "ltr" }}>
+            © 2026 Trend Services — مكتب خدمات — Médéa, Algérie 26000 · <a href={WEB_WA} target="_blank" rel="noreferrer">Développé par: <a href="https://instagram.com/bettercallwsim" style={{color: "rgba(67, 160, 176, 0.85)", textDecoration: "underline"}}>bettercallwsim</a></a>
           </div>
         </div>
       </footer>
