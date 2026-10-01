@@ -694,11 +694,7 @@ export default function TrendServices() {
                 💬 واتساب الآن / WhatsApp
               </a>
               <a href="tel:+213675554833" className="outline-btn" style={{ justifyContent: "center", padding: "18px 24px", fontSize: 17 }}>
-<<<<<<< HEAD
                 📞 0675.55.48.33
-=======
-                0661972461
->>>>>>> c5c627f (small updates on design nd other things)
               </a>
             </div>
             <div style={{ display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
